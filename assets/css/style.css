@@ -1,0 +1,27 @@
+body {
+    background-color: darkgrey;
+}
+
+#maintitle{
+    border: solid 4px black;
+    text-align: center;
+    margin-bottom:20px;
+
+}
+
+#gamespace{
+    border: solid 2px black;
+    text-align:center;
+    height: 100px;
+    margin-bottom:20px;
+}
+#guesses{
+    border: solid 2px black;
+    text-align:center;
+    height: 100px;
+    margin-bottom: 20px;
+}
+underscore{
+    font-size:30px;
+    text-align:bottom;
+}

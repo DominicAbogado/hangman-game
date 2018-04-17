@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" style type="text/css">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="maintitle">
+                <h1>Welcome to the Game of Thrones</h1>
+                <h2>When You Play the Game of Thrones
+                    <br> You Win or you Die
+                </h2>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" id="gamespace">
+                <p>Losers of the Game of Thrones</p>
+                <div id="underscore"></div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" id="guesses">
+                <p>Rightful Heir to the Throne</p>
+                <div class="goodguess"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="guesses">
+                <p>Pretenders</p>
+                <div class="badguess"></div>
+
+                <script>
+                    
+                    var gotnames = ["tyrion", "the hound", "daenerys", "jon snow", "rhaegar", "lannister", "targaryen", "baratheon","sansa","brienne of tarth","ygritte"];
+                    var randword = gotnames[Math.floor(Math.random() * gotnames.length)];
+
+                    var s;
+                    var count = 0;
+
+
+                    var answers = [];
+
+                    function StartUp()
+                    {
+                        for (var i = 0; i <gotnames.length; i++)
+                        {
+                            answers[i] = "_";
+                        }
+                    }
+
+                    s = answers.join(" ");
+                    document.getElementById("underscore").innerHTML = s;
+
+                </script>
+
+            </div>
+        </div>
+
+</body>
+
+</html>
