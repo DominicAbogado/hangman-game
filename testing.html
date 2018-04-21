@@ -36,97 +36,102 @@
         <div class="row">
             <div class="col-md-12" id="guesses">
                 <p>Rightful Heir to the Throne</p>
-                <div class="goodguess"></div>
+                <p id="goodguess"></p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" id="guesses">
+            <div class="col-md-6" id="guesses">
                 <p>Pretenders</p>
                 <p id="badguess"></p>
+            </div>
+            <div class="col-md-6" id="guesses">
+                <p id="lives">Lives Remaining</p>
+            </div>
+        </div>
 
-                <script>
-
-                    //Create an Array with list of names for Hangman
-                    var gotnames = ["tyrion", "daenerys", "rhaegar", "lannister", "targaryen", "baratheon", "sansa", "ygritte"];
-                    //Choose word randomly
-                    var randNum = Math.floor(Math.random() * gotnames.length);
-
-                    //Create underscore based on length of word
-                    let chosenWord = gotnames[randNum]
-
-                    //Empty Array to store the Underscores
-                    let underScores = [];
-                    
-                    //empty array to store incorrectguesses
-                    let wrongGuess = [];
-
-                    //Empty Array to store Correct Guesses
-                    let rightGuess = [];
-
-                    let generateUnderscore = () => {
-                        for (let i = 0; i < chosenWord.length; i++) {
-                            underScores.push('_');
-                        }
-                        return underScores;
-
-                    }
-
-
-                    //chosenWord.length returns the number of characters in that string. var before .length is string
-                    console.log(chosenWord)
-                    console.log(generateUnderscore())
-                    document.getElementById("demo").innerHTML = underScores
-
-
-
-                    //Get user guess
-
-                        //called littlefinger because you dont know if you can trust it
-                    document.onkeyup = function littlefinger(event) {
-                        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                        // wrongGuess.push(userGuess);
-                        console.log(userGuess);
-                        // console.log(wrongGuess);
-                        document.getElementById("badguess").innerHTML = userGuess;
-                    } 
-
-
-
-
+        <script>
+            //Create an Array with list of names for Hangman
+            var gotnames = ["tyrion", "daenerys", "rhaegar"];
+            //Choose word randomly
+            var randNum = Math.floor(Math.random() * gotnames.length);
+            //Create underscore based on length of word
+            var chosenWord = gotnames[randNum]
+            //Empty Array to store the Underscores
+            var underScores = [];
+            //empty array to store incorrectguesses
+            var wrongGuess = [];
+            //Empty Array to store Correct Guesses
+            var rightGuess = [];
+            var lives = 4
+            //Generate Underscores
+            var generateUnderscore = () => {
+                for (let i = 0; i < chosenWord.length; i++) {
+                    underScores.push('_');
+                }
+                return underScores;
+            }
+            // Creating an array out of the individual letters in the word
+            var letters = chosenWord.split('');
+            console.log(letters);
+            // turn individual word into an array containing each individual letter. Turn chosenword into an array
+            //chosenWord.length returns the number of characters in that string. var before .length is string
+            //console.log(chosenWord)
+            console.log(generateUnderscore())
+            document.getElementById("demo").innerHTML = underScores
+            //Get user guess
+            //called littlefinger because you dont know if you can trust it
+            document.onkeyup = function littlefinger(event) {
+                userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+                if (letters.indexOf(userGuess) < 0) {
+                    wrongGuess.push(userGuess);
+                    document.getElementById("badguess").innerHTML = wrongGuess;
+                    lives - 1;
+                    document.getElementById("remaining").innerHTML = "Lives remaining: " + lives;
+                }
+                if (letters.indexOf(userGuess) > 0) {
+                    rightGuess.push(userGuess);
+                    document.getElementById("goodguess").innerHTML = rightGuess;
+                }
+                // console.log(wrongGuess);
+                // document.getElementById("badguess").innerHTML = userGuess;
+            }
+            //Saving this code for later 
+                    // document.onkeyup = function littlefinger(event) {
+                    //     userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+                    //     wrongGuess.push(userGuess);
+                    //     console.log(userGuess);
+                    //     // console.log(wrongGuess);
+                    //     document.getElementById("badguess").innerHTML = userGuess;
+                    //     alert(chosenWord[0].indexOf(userGuess))
+                    // }
+                    // function splitString(stringToSplit, space) {
+                    //     var arrayOfStrings = stringToSplit.split(space);
+                    //     console.log('The original string is: ' + stringToSplit + '"');
+                    //     console.log('The separator is: ' + space + "'");
+                    //     splitString(chosenWord, space);
+                    //     cnosole.log(arrayOfStrings)
+                    // }
                     //Check if user guess is right
-
-                    
-
                     //if right, push to right array
                     //If wrong push to wrong array
-
                     // 
                     // ;
-
                     // var s;
                     // var count = 0;
-
-
                     // var answers = [];
-
                     // function StartUp()
                     // {
                     //     for (var i = 0; i <gotnames.length; i++)
                     //     {
                     //         answers[i] = "_";
                     //     }
-
-
                     // s = answers.join(" ");
                     // document.getElementById("underscore").innerHTML = s;
                     // }
-
                     // console.log(randword)
+        </script>
 
-                </script>
 
-            </div>
-        </div>
 
 </body>
 

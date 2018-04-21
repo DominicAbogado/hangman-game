@@ -10,6 +10,7 @@
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" style type="text/css">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
@@ -27,22 +28,16 @@
 
         <div class="row">
             <div class="col-md-12" id="gamespace">
-                <p>Losers of the Game of Thrones</p>
-                <p id="demo"></p>
+                <p>To Be Executed</p>
+                <p id="numofletters"></p>
+                <p id="rightGuess"></p>
 
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12" id="guesses">
-                <p>Rightful Heir to the Throne</p>
-                <p id="goodguess"></p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6" id="guesses">
                 <p>Pretenders</p>
-                <p id="badguess"></p>
+                <p id="wrongGuess"></p>
             </div>
             <div class="col-md-6" id="guesses">
                 <p id="lives">Lives Remaining</p>
@@ -52,7 +47,7 @@
         <script>
 
             //Create an Array with list of names for Hangman
-            var gotnames = ["tyrion", "daenerys", "rhaegar"];
+            var gotnames = ["tyrion", "stark", "dragon"];
             //Choose word randomly
             var randNum = Math.floor(Math.random() * gotnames.length);
 
@@ -60,7 +55,7 @@
             var chosenWord = gotnames[randNum]
 
             //Empty Array to store the Underscores
-            var underScores = [];
+
 
             //empty array to store incorrectguesses
             var wrongGuess = [];
@@ -70,49 +65,60 @@
 
             var lives = 4
 
+            var underScores = []
 
-            //Generate Underscores
-            var generateUnderscore = () => {
-                for (let i = 0; i < chosenWord.length; i++) {
+            var letters = chosenWord.split('');
+            console.log(letters);
+
+            function genUnderScore() {
+                for (let i = 0; i < letters.length; i++) {
                     underScores.push('_');
                 }
                 return underScores;
-
             }
 
+            genUnderScore()
+            console.log(underScores)
+            //Generate Underscores OR just list the number of letters
+            //     // document.getElementById("numofletters").innerHTML= ("The number of letters in their name is: " + letters.length)
+            //     function genUnderScores (){
+            //         for (let i = 0; i < letters.length; i++) {
+            //             underScores.push('_');
+            //             return underScores
+
+
+
             // Creating an array out of the individual letters in the word
-            var letters = chosenWord.split('');
-            console.log(letters);
+
 
 
             // turn individual word into an array containing each individual letter. Turn chosenword into an array
 
             //chosenWord.length returns the number of characters in that string. var before .length is string
-            //console.log(chosenWord)
-            console.log(generateUnderscore())
-            document.getElementById("demo").innerHTML = underScores
-
-
 
             //Get user guess
             //called littlefinger because you dont know if you can trust it
             document.onkeyup = function littlefinger(event) {
                 userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                if (letters.indexOf(userGuess) < 0) {
+                var replace = (chosenWord.indexOf(userGuess));
+                console.log(replace);
+                if (replace < 0) {
                     wrongGuess.push(userGuess);
-                    document.getElementById("badguess").innerHTML = wrongGuess;
-                    lives - 1;
-                    document.getElementById("remaining").innerHTML = "Lives remaining: " + lives;
-
+                    document.getElementById("wrongGuess").innerHTML = wrongGuess;
+                    // lives - 1;
+                    // document.getElementById("lives").innerHTML = "Lives remaining: " + lives;
                 }
-                if (letters.indexOf(userGuess) > 0) {
-                    rightGuess.push(userGuess);
-                    document.getElementById("goodguess").innerHTML = rightGuess;
+                for (var i = 0; i < letters.length; i++) {
+                    if (replace >= 0) {
+                        underScores[replace] = userGuess;
+                        console.log(letters[replace]);
+                        document.getElementById("rightGuess").innerHTML = underScores
+                    }
                 }
+            }
                 // console.log(wrongGuess);
                 // document.getElementById("badguess").innerHTML = userGuess;
 
-            }
 
 
             //Saving this code for later 
