@@ -61,7 +61,6 @@
                     let wrongGuess = [];
 
                     //Empty Array to store Correct Guesses
-                    let rightGuess = [];
 
                     let generateUnderscore = () => {
                         for (let i = 0; i < chosenWord.length; i++) {
@@ -80,14 +79,16 @@
 
 
                     //Get user guess
+
                         //called littlefinger because you dont know if you can trust it
-                        document.onkeyup = function littlefinger(event) {
+                    document.onkeyup = function littlefinger(event) {
                         var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                        // wrongGuess.push(userGuess);
+                        wrongGuess.push(userGuess);
                         console.log(userGuess);
                         // console.log(wrongGuess);
                         document.getElementById("badguess").innerHTML = userGuess;
                     } 
+
 
 
 
