@@ -13,4 +13,4 @@ document.getElementById("demo").innerHTML = gotnames;
 
 //if right, push to right array
 
-//if wrong, push to wrong array
+//if wrong,

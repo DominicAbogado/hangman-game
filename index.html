@@ -45,29 +45,53 @@
                 <div class="badguess"></div>
 
                 <script>
-                    
-                    var gotnames = ["tyrion", "the hound", "daenerys", "jon snow", "rhaegar", "lannister", "targaryen", "baratheon","sansa","brienne of tarth","ygritte"];
-                    var randword = gotnames[Math.floor(Math.random() * gotnames.length)];
 
-                    var s;
-                    var count = 0;
+                    //Create an Array with list of names for Hangman
+                    var gotnames = ["tyrion", "daenerys", "rhaegar", "lannister", "targaryen", "baratheon","sansa","ygritte"];
+                    //Choose word randomly
+                    var randNum = Math.floor(Math.random() * gotnames.length);
+                    let chosenWord = gotnames[randNum]
+                    //Create underscore based on length of word
+                    let underScores = [];
 
-
-                    var answers = [];
-
-                    function StartUp()
-                    {
-                        for (var i = 0; i <gotnames.length; i++)
-                        {
-                            answers[i] = "_";
-                        }
-                    
-
-                    s = answers.join(" ");
-                    document.getElementById("underscore").innerHTML = s;
+                    let generateUnderscore = () => {
+                         for(let i =0; i< chosenWord.length; i++){
+                             underScores.push('_');
+                         }
+                         return underScores;
                     }
+                    //chosenWord.length returns the number of characters in that string. var before .length is string
+                console.log(chosenWord)
+                   console.log(generateUnderscore())
 
-                    console.log(randword)
+                    //Get user guess
+                     
+                    //Check if user guess is right
+                    //if right, push to right array
+                    //If wrong push to wrong array
+                    
+                    // 
+                    // ;
+
+                    // var s;
+                    // var count = 0;
+
+
+                    // var answers = [];
+
+                    // function StartUp()
+                    // {
+                    //     for (var i = 0; i <gotnames.length; i++)
+                    //     {
+                    //         answers[i] = "_";
+                    //     }
+                    
+
+                    // s = answers.join(" ");
+                    // document.getElementById("underscore").innerHTML = s;
+                    // }
+
+                    // console.log(randword)
 
                 </script>
 
