@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-md-12" id="gamespace">
                 <p>Losers of the Game of Thrones</p>
-                <div id="underscore"></div>
+                <p id="demo"></p>
 
             </div>
         </div>
@@ -42,34 +42,57 @@
         <div class="row">
             <div class="col-md-12" id="guesses">
                 <p>Pretenders</p>
-                <div class="badguess"></div>
+                <p id="badguess"></p>
 
                 <script>
 
                     //Create an Array with list of names for Hangman
-                    var gotnames = ["tyrion", "daenerys", "rhaegar", "lannister", "targaryen", "baratheon","sansa","ygritte"];
+                    var gotnames = ["tyrion", "daenerys", "rhaegar", "lannister", "targaryen", "baratheon", "sansa", "ygritte"];
                     //Choose word randomly
                     var randNum = Math.floor(Math.random() * gotnames.length);
-                    let chosenWord = gotnames[randNum]
+
                     //Create underscore based on length of word
+                    let chosenWord = gotnames[randNum]
+
+                    //Empty Array to store the Underscores
                     let underScores = [];
+                    
+                    //empty array to store the user guesses
+                    let wrongGuess = [];
 
                     let generateUnderscore = () => {
-                         for(let i =0; i< chosenWord.length; i++){
-                             underScores.push('_');
-                         }
-                         return underScores;
+                        for (let i = 0; i < chosenWord.length; i++) {
+                            underScores.push('_');
+                        }
+                        return underScores;
+
                     }
+
+
                     //chosenWord.length returns the number of characters in that string. var before .length is string
-                console.log(chosenWord)
-                   console.log(generateUnderscore())
+                    console.log(chosenWord)
+                    console.log(generateUnderscore())
+                    document.getElementById("demo").innerHTML = underScores
+
+
 
                     //Get user guess
-                     
+
+                    document.onkeyup = function pretenders(event) {
+                        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+                        wrongGuess.push(userGuess);
+                        console.log(userGuess);
+                        console.log(wrongGuess);
+                        document.getElementById("badguess").innerHTML = wrongGuess
+                    }
+
+
+
+
                     //Check if user guess is right
                     //if right, push to right array
                     //If wrong push to wrong array
-                    
+
                     // 
                     // ;
 
@@ -85,7 +108,7 @@
                     //     {
                     //         answers[i] = "_";
                     //     }
-                    
+
 
                     // s = answers.join(" ");
                     // document.getElementById("underscore").innerHTML = s;
