@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Final Version</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
@@ -19,9 +19,11 @@
         <div class="row">
             <div class="col-md-12" id="maintitle">
                 <h1>Welcome to the Game of Thrones</h1>
+
                 <h2>When You Play the Game of Thrones
                     <br> You Win or you Die
                 </h2>
+                <p id="demo">Click Here to Begin Playing.</p>
             </div>
 
         </div>
@@ -40,8 +42,11 @@
                 <p id="wrongGuess"></p>
             </div>
             <div class="col-md-6" id="guesses">
-                <p id="lives">Lives Remaining</p>
+                <p>Lives Remaining</p>
+                <p id="lives"></p>
+
             </div>
+
         </div>
 
         <script>
@@ -55,7 +60,7 @@
             var chosenWord = gotnames[randNum]
 
             //Empty Array to store the Underscores
-
+            var lives = 4
 
             //empty array to store incorrectguesses
             var wrongGuess = [];
@@ -63,28 +68,29 @@
             //Empty Array to store Correct Guesses
             var rightGuess = [];
 
-            var lives = 4
-
             var underScores = []
 
             var letters = chosenWord.split('');
             console.log(letters);
 
-            function genUnderScore() {
+
+
+            //Generate Underscores OR just list the number of letters
+            // document.getElementById("demo").onclick = function () { 
+            //     genUnderScore() };
+
+            function genUnderScores() {
                 for (let i = 0; i < letters.length; i++) {
                     underScores.push('_');
                 }
-                return underScores;
+                return underScores
+
             }
 
-            genUnderScore()
+            genUnderScores()
+            
+            document.getElementById("rightGuess").innerHTML = underScores
             console.log(underScores)
-            //Generate Underscores OR just list the number of letters
-            //     // document.getElementById("numofletters").innerHTML= ("The number of letters in their name is: " + letters.length)
-            //     function genUnderScores (){
-            //         for (let i = 0; i < letters.length; i++) {
-            //             underScores.push('_');
-            //             return underScores
 
 
 
@@ -101,12 +107,13 @@
             document.onkeyup = function littlefinger(event) {
                 userGuess = String.fromCharCode(event.keyCode).toLowerCase();
                 var replace = (chosenWord.indexOf(userGuess));
+                
                 console.log(replace);
                 if (replace < 0) {
                     wrongGuess.push(userGuess);
                     document.getElementById("wrongGuess").innerHTML = wrongGuess;
-                    // lives - 1;
-                    // document.getElementById("lives").innerHTML = "Lives remaining: " + lives;
+                    lives--;
+                    document.getElementById("lives").innerHTML = lives
                 }
                 for (var i = 0; i < letters.length; i++) {
                     if (replace >= 0) {

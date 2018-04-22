@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Test Version</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" style type="text/css">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
@@ -18,6 +19,7 @@
         <div class="row">
             <div class="col-md-12" id="maintitle">
                 <h1>Welcome to the Game of Thrones</h1>
+                <input id="StartButton" type="button" value="Click Here to Start" />
                 <h2>When You Play the Game of Thrones
                     <br> You Win or you Die
                 </h2>
@@ -27,22 +29,16 @@
 
         <div class="row">
             <div class="col-md-12" id="gamespace">
-                <p>Losers of the Game of Thrones</p>
-                <p id="demo"></p>
+                <p>To Be Executed</p>
+                <p id="numofletters"></p>
+                <p id="rightGuess"></p>
 
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12" id="guesses">
-                <p>Rightful Heir to the Throne</p>
-                <p id="goodguess"></p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6" id="guesses">
                 <p>Pretenders</p>
-                <p id="badguess"></p>
+                <p id="wrongGuess"></p>
             </div>
             <div class="col-md-6" id="guesses">
                 <p id="lives">Lives Remaining</p>
@@ -50,52 +46,84 @@
         </div>
 
         <script>
+
             //Create an Array with list of names for Hangman
-            var gotnames = ["tyrion", "daenerys", "rhaegar"];
+            var gotnames = ["tyrion", "stark", "dragon"];
             //Choose word randomly
             var randNum = Math.floor(Math.random() * gotnames.length);
+
             //Create underscore based on length of word
             var chosenWord = gotnames[randNum]
+
             //Empty Array to store the Underscores
-            var underScores = [];
+
+
             //empty array to store incorrectguesses
             var wrongGuess = [];
+
             //Empty Array to store Correct Guesses
             var rightGuess = [];
+
             var lives = 4
-            //Generate Underscores
-            var generateUnderscore = () => {
-                for (let i = 0; i < chosenWord.length; i++) {
+
+            var underScores = []
+
+            var letters = chosenWord.split('');
+            console.log(letters);
+
+
+            function genUnderScore() {
+                for (let i = 0; i < letters.length; i++) {
                     underScores.push('_');
                 }
                 return underScores;
             }
-            // Creating an array out of the individual letters in the word
-            var letters = chosenWord.split('');
-            console.log(letters);
-            // turn individual word into an array containing each individual letter. Turn chosenword into an array
-            //chosenWord.length returns the number of characters in that string. var before .length is string
-            //console.log(chosenWord)
-            console.log(generateUnderscore())
-            document.getElementById("demo").innerHTML = underScores
-            //Get user guess
-            //called littlefinger because you dont know if you can trust it
-            document.onkeyup = function littlefinger(event) {
-                userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                if (letters.indexOf(userGuess) < 0) {
-                    wrongGuess.push(userGuess);
-                    document.getElementById("badguess").innerHTML = wrongGuess;
-                    lives - 1;
-                    document.getElementById("remaining").innerHTML = "Lives remaining: " + lives;
+
+
+                //Generate Underscores OR just list the number of letters
+                //     // document.getElementById("numofletters").innerHTML= ("The number of letters in their name is: " + letters.length)
+                //     function genUnderScores (){
+                //         for (let i = 0; i < letters.length; i++) {
+                //             underScores.push('_');
+                //             return underScores
+
+
+
+                // Creating an array out of the individual letters in the word
+
+
+
+                // turn individual word into an array containing each individual letter. Turn chosenword into an array
+
+                //chosenWord.length returns the number of characters in that string. var before .length is string
+
+                //Get user guess
+                //called littlefinger because you dont know if you can trust it
+                (body).onkeyup(function littlefinger(event) {
+                    userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+                    var replace = (chosenWord.indexOf(userGuess));
+                    console.log(replace);
+                    if (replace < 0) {
+                        wrongGuess.push(userGuess);
+                        document.getElementById("wrongGuess").innerHTML = wrongGuess;
+                        // lives - 1;
+                        // document.getElementById("lives").innerHTML = "Lives remaining: " + lives;
+                    }
+                    for (var i = 0; i < letters.length; i++) {
+                        if (replace >= 0) {
+                            underScores[replace] = userGuess;
+                        }
+                    }
                 }
-                if (letters.indexOf(userGuess) > 0) {
-                    rightGuess.push(userGuess);
-                    document.getElementById("goodguess").innerHTML = rightGuess;
-                }
+                
+                
                 // console.log(wrongGuess);
                 // document.getElementById("badguess").innerHTML = userGuess;
-            }
+
+
+
             //Saving this code for later 
+
                     // document.onkeyup = function littlefinger(event) {
                     //     userGuess = String.fromCharCode(event.keyCode).toLowerCase();
                     //     wrongGuess.push(userGuess);
@@ -104,6 +132,8 @@
                     //     document.getElementById("badguess").innerHTML = userGuess;
                     //     alert(chosenWord[0].indexOf(userGuess))
                     // }
+
+
                     // function splitString(stringToSplit, space) {
                     //     var arrayOfStrings = stringToSplit.split(space);
                     //     console.log('The original string is: ' + stringToSplit + '"');
@@ -111,24 +141,43 @@
                     //     splitString(chosenWord, space);
                     //     cnosole.log(arrayOfStrings)
                     // }
+
+
+
                     //Check if user guess is right
+
+
+
+
+
+
+
                     //if right, push to right array
                     //If wrong push to wrong array
+
                     // 
                     // ;
+
                     // var s;
                     // var count = 0;
+
+
                     // var answers = [];
+
                     // function StartUp()
                     // {
                     //     for (var i = 0; i <gotnames.length; i++)
                     //     {
                     //         answers[i] = "_";
                     //     }
+
+
                     // s = answers.join(" ");
                     // document.getElementById("underscore").innerHTML = s;
                     // }
+
                     // console.log(randword)
+
         </script>
 
 
