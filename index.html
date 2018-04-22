@@ -92,6 +92,13 @@
             document.getElementById("rightGuess").innerHTML = underScores
             console.log(underScores)
 
+            function GameOver() {
+                document.removeEventListener(function littlefinger(event) {
+                    canvasMouseOver(event);
+                });
+                ResetGlobalVariables();
+            }
+
 
 
             // Creating an array out of the individual letters in the word
@@ -104,28 +111,35 @@
 
             //Get user guess
             //called littlefinger because you dont know if you can trust it
+            
             document.onkeyup = function littlefinger(event) {
                 userGuess = String.fromCharCode(event.keyCode).toLowerCase();
                 var replace = (chosenWord.indexOf(userGuess));
                 console.log(replace);
-                if (replace < 0) {
-                    wrongGuess.push(userGuess);
-                    document.getElementById("wrongGuess").innerHTML = wrongGuess;
-                    lives--;
-                    alert("Lives remaining: " + lives)
+                    if (replace < 0) {
+                        wrongGuess.push(userGuess);
+                        document.getElementById("wrongGuess").innerHTML = wrongGuess;
+                        lives--;
+                        alert("Lives remaining: " + lives)
 
-                }
-                for (var i = 0; i < letters.length; i++) {
-                    if (replace >= 0) {
-                        underScores[replace] = userGuess;
-                        console.log(letters[replace]);
-                        document.getElementById("rightGuess").innerHTML = underScores
                     }
-                }
-                if (lives < 1) {
-                    alert("You Have Lost the Game of Thrones");
-                }
-            }
+                    if (lives < 1) {
+                        alert("You have Lost the Game of Thrones")
+                    }
+                    for (var i = 0; i < letters.length; i++) {
+                        if (replace >= 0) {
+                            underScores[replace] = userGuess;
+                            console.log(letters[replace]);
+                            document.getElementById("rightGuess").innerHTML = underScores
+                        }
+                        if(underScores.length == letters.length){
+                            alert("You have executed the pretender")
+                        }
+                    }
+            } 
+            
+            
+            
                 // console.log(wrongGuess);
                 // document.getElementById("badguess").innerHTML = userGuess;
 
