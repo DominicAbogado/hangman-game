@@ -1,5 +1,5 @@
 body {
-    background-image: url("/Users/dominicabogado/xmen/assignment3/hangman-game/assets/images/ironthrone.jpg");
+    background-color: #444;
     font-family: 'Cinzel Decorative', cursive; 
     color: #444444;
 }
@@ -12,14 +12,14 @@ body {
 }
 
 #gamespace{
-    border: solid 2px lightseagreen;
+    border: solid 2px black;
     text-align:center;
     height: 130px;
     margin-bottom:20px;
     background-color: lightgray
 }
 #guesses{
-    border: solid 2px lightseagreen;
+    border: solid 2px black;
     text-align:center;
     height: 100px;
     background-color: lightgray
