@@ -1,190 +1,49 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>TESTING</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-        crossorigin="anonymous">
+      crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" style type="text/css">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-</head>
-
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12" id="maintitle">
-                <h1>Welcome to the Game of Thrones</h1>
-
-                <h2>When You Play the Game of Thrones
-                    <br> You Win or you Die
-                </h2>
-            </div>
-
+      <div class="row">
+        <div class="col-md-12" id="maintitle">
+          <h1>Welcome to the Game of Thrones</h1>
+          <h2>When You Play the Game of Thrones
+            <br> You Win or you Die
+          </h2>
         </div>
-
-        <div class="row">
-            <div class="col-md-12" id="gamespace">
-                <p>To Be Executed</p>
-                <p id="theWord"></p>
-
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" id="gamespace">
+          <p>To Be Executed</p>
+          <p id="theWord"></p>
         </div>
-        <div class="row">
-            <div class="col-md-4" id="guesses">
-                <p>Failed Attempts at the Throne</p>
-                <p id="wrongGuess"></p>
-            </div>
-            <div class="col-md-4 start-btn" id="guesses">
-                <p>Click here to declare yourself king
-                    <br>
-                    <i>(Start the game)</i>
-                </p>
-            </div>
-            <div class="col-md-4" id="guesses">
-                <p>Remaining Descendants</p>
-                <p id="lives"></p>
-
-            </div>
-
+      </div>
+      <div class="row">
+        <div class="col-md-4" id="guesses">
+          <p>Failed Attempts at the Throne</p>
+          <p id="wrongGuess"></p>
         </div>
-
+        <div class="col-md-4 start-btn" id="guesses">
+          <p id="startGame">Click here to declare yourself king
+            <br>
+            <i>(Start the game)</i>
+          </p>
+        </div>
+        <div class="col-md-4" id="guesses">
+          <p>Remaining Descendants</p>
+          <p id="lives"></p>
+        </div>
+      </div>
     </div>
-
-    <script>
-        //Create an array of words
-
-        var wrongLetter = []
-
-        var underScores = []
-
-        var rightLetter = []
-
-        var winCondition = []
-
-
-
-
-        var gameOver = false
-
-
-        //Create Variables for lives,
-
-        var lives = 4
-
-        //Randomly generate a word from an array
-
-        // turns the chosen word into an array of strings
-
-
-
-        //Create underscores for the word that was randomly chosen
-
-
-        // //Start the Game
-        $('.row').on('click', (".start-btn"), function startGame() {
-
-            // var letters = chosenWord.split('');
-            // var randNum = Math.floor(Math.random() * gotNames.length);
-            // var chosenWord = gotNames[randNum]
-
-            var again = "Would you like to play again?"
-
-            function genUnderScores() {
-                gotNames = ["tyrion", "stark", "dragon", 'jaime', 'greyjoy']
-                randNum = Math.floor(Math.random() * gotNames.length);
-                chosenWord = gotNames[randNum]
-                letters = chosenWord.split('');
-                for (let i = 0; i < letters.length; i++) {
-                    underScores.push('_');
-                }
-                return underScores;
-            }
-            genUnderScores();
-            $('#theWord').text(underScores);
-            $('#lives').text(lives);
-            console.log(underScores);
-            console.log(chosenWord)
-
-            document.onkeyup = function littlefinger(event) {
-                if (gameOver) { return; }
-                userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                console.log(userGuess);
-                var replace = (chosenWord.indexOf(userGuess));
-                console.log(replace)
-                console.log(userGuess)
-                if (replace < 0) {
-                    wrongLetter.push(userGuess);
-                    console.log(wrongLetter)
-                    $("#wrongGuess").text(wrongLetter);
-                    lives--;
-                    $('#lives').text(lives);
-                }
-                if (replace >= 0) {
-                    underScores[replace] = userGuess;
-                    $('#theWord').text(underScores);
-                    winCondition.push(userGuess);
-                }
-                if (lives == 0) {
-                    alert('You are no true heir to the Iron Throne')
-                    alert('Something terrible has happened to you in the worst imaginable way possible')
-                    gameOver = true
-                    confirm(again)
-                    if (again == true) {
-                        $("#wrongGuess").empty;
-                        $('#theWord').empty;
-                        $('#lives').empty;
-                    }
-                    if (again == false) {
-                        alert("Thank you for playing the game of Thrones")
-                    }
-                }
-                if (winCondition.length == letters.length) {
-                    alert('You have won the Game of Thrones')
-                    gameOver = true;
-                    confirm(again)
-                    if (again == true) {
-                        $("#wrongGuess").empty();
-                        $('#theWord').empty();
-                        $('#lives').empty();
-                    }
-                    if (again == false) {
-                        alert("Thank you for playing the game of Thrones")
-                    }
-                }
-            }
-
-
-
-
-            // document.onkeyup = function littlefinger(event) {
-            //     if (gameOver) { return; }
-            //     userGuess = String.fromCharCode(event).toLowerCase();
-            //     var replace = (chosenWord.indexOf(userGuess));
-            //     if (replace < 0) {
-            //         wrongGuess.push(userGuess);
-            //         document.getElementById("wrongGuess").innerHTML = wrongGuess;
-            //         lives--;
-            //         $("#lives").text(lives);
-            //     }
-
-        });
-//Capture the users guess for letters
-
-//If the user guess is wrong, it removes from your lives and the letter is recorded
-
-//If the user guess is right it is written on the board
-
-//If the user runs out of lives, they lose the game
-
-
-
-    </script>
-
-</body>
-
+    <script src='./assets/javascript/game.js'></script>
+  </body>
 </html>
