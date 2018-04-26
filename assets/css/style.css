@@ -1,9 +1,8 @@
 body {
-    background-image: url("/assets/images/ironthrone.jpg");
-    font-family: 'Cinzel Decorative', cursive;
+    background-image: url("/Users/dominicabogado/xmen/assignment3/hangman-game/assets/images/ironthrone.jpg");
+    font-family: 'Cinzel Decorative', cursive; 
     color: #444444;
 }
-
 #maintitle{
     border: solid 4px black;
     text-align: center;

@@ -66,7 +66,7 @@
 
         var winCondition = []
 
-
+        
 
 
         var gameOver = false
@@ -88,17 +88,13 @@
         // //Start the Game
         $('.row').on('click', (".start-btn"), function startGame() {
 
-            // var letters = chosenWord.split('');
-            // var randNum = Math.floor(Math.random() * gotNames.length);
-            // var chosenWord = gotNames[randNum]
-
+            var gotNames = ["tyrion", "stark", "dragon", 'jaime', 'greyjoy']
+            var randNum = Math.floor(Math.random() * gotNames.length);
+            var chosenWord = gotNames[randNum]
+            var letters = chosenWord.split('');
             var again = "Would you like to play again?"
 
             function genUnderScores() {
-                gotNames = ["tyrion", "stark", "dragon", 'jaime', 'greyjoy']
-                randNum = Math.floor(Math.random() * gotNames.length);
-                chosenWord = gotNames[randNum]
-                letters = chosenWord.split('');
                 for (let i = 0; i < letters.length; i++) {
                     underScores.push('_');
                 }
@@ -134,30 +130,22 @@
                     alert('Something terrible has happened to you in the worst imaginable way possible')
                     gameOver = true
                     confirm(again)
-                    if (again == true) {
-                        $("#wrongGuess").empty;
-                        $('#theWord').empty;
-                        $('#lives').empty;
-                    }
-                    if (again == false) {
-                        alert("Thank you for playing the game of Thrones")
-                    }
+                    
                 }
                 if (winCondition.length == letters.length) {
                     alert('You have won the Game of Thrones')
-                    gameOver = true;
+                    gameOver=true;
                     confirm(again)
-                    if (again == true) {
-                        $("#wrongGuess").empty;
-                        $('#theWord').empty;
-                        $('#lives').empty;
-                    }
-                    if (again == false) {
-                        alert("Thank you for playing the game of Thrones")
-                    }
+                }
+                if (again == true)
+                {
+                    $("#wrongGuess").empty(wrongLetter);
+                    $('#theWord').empty(underScores);
+                    $('#lives').empty(lives);
+
+
                 }
             }
-
 
 
 
