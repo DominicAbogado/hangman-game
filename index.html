@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" style type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -56,7 +57,7 @@
             //
 
             //Create an Array with list of names for Hangman
-            var gotnames = ["tyrion", "stark", "dragon"];
+            var gotnames = ["tyrion", "stark", "dragon", 'Jaimie', 'greyjoy',];
             //Choose word randomly
             var randNum = Math.floor(Math.random() * gotnames.length);
 
@@ -79,8 +80,12 @@
 
             var gameStart = false
 
+            var again = ("Would you like to play again?")
+
             var letters = chosenWord.split('');
             console.log(letters)
+            
+            console.log(lives)
 
             //listern for the Key Up for the game logic
 
@@ -110,7 +115,7 @@
 
             $('h1').on('click', function gameStart() {
                 genUnderScores()
-                document.getElementById("rightGuess").innerHTML = underScores
+                $("#rightGuess").text(underScores)
                 console.log(underScores)
                 $("#lives").text(lives)
             });
@@ -133,7 +138,7 @@
                 if (gameOver) { return; }
                 userGuess = String.fromCharCode(event.keyCode).toLowerCase();
                 var replace = (chosenWord.indexOf(userGuess));
-                var again = ("Would you like to play again?")
+                
                 console.log(replace);
                 if (replace < 0) {
                     wrongGuess.push(userGuess);
@@ -143,22 +148,22 @@
                 }
                 if (lives == 0) {
                     alert("You have Lost the Game of Thrones")
-                    alert(again)
+                    confirm(again)
                     if (again = true) {
                         $('#rightguesses').empty();
                         $('#wrongGuess').empty();
                         $('#lives').empty();
-                        lives = 4
                         genUnderScores();
-                }  else alert('Gods we were strong (also game over')
-            }
-            for (var i = 0; i < letters.length; i++) {
-                if (replace >= 0) {
-                    underScores[replace] = userGuess;
-                    console.log(letters[replace]);
-                    document.getElementById("rightGuess").innerHTML = underScores
+                    } else{ alert('You have been killed by the Kings Guard Jaime Lannister')
                 }
-            }
+                }
+                for (var i = 0; i < letters.length; i++) {
+                    if (replace >= 0) {
+                        underScores[replace] = userGuess;
+                        console.log(letters[replace]);
+                        document.getElementById("rightGuess").innerHTML = underScores
+                    }
+                }
 
             }
 

@@ -30,174 +30,131 @@
         <div class="row">
             <div class="col-md-12" id="gamespace">
                 <p>To Be Executed</p>
-                <p id="numofletters"></p>
-                <p id="rightGuess"></p>
+                <p id="theWord"></p>
 
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6" id="guesses">
-                <p>Pretenders</p>
+            <div class="col-md-4" id="guesses">
+                <p>Failed Attempts at the Throne</p>
                 <p id="wrongGuess"></p>
             </div>
-            <div class="col-md-6" id="guesses">
-                <p>Lives Remaining</p>
+            <div class="col-md-4 start-btn" id="guesses">
+                <p>Click here to declare yourself king
+                    <br>
+                    <i>(Start the game)</i>
+                </p>
+            </div>
+            <div class="col-md-4" id="guesses">
+                <p>Remaining Descendants</p>
                 <p id="lives"></p>
 
             </div>
 
         </div>
 
-        <script>
+    </div>
 
-            //Create an Array with list of names for Hangman
-            var gotnames = ["tyrion", "stark", "dragon"];
-            //Choose word randomly
-            var randNum = Math.floor(Math.random() * gotnames.length);
+    <script>
+        //Create an array of words
 
-            //Create underscore based on length of word
-            var chosenWord = gotnames[randNum]
+        var gotNames = ["tyrion", "stark", "dragon", 'jaime', 'greyjoy']
 
-            //Empty Array to store the Underscores
-
-            //empty array to store incorrectguesses
-            var wrongGuess = [];
-
-            //Empty Array to store Correct Guesses
-            var lives = 4
-            var rightGuess = [];
-
-            var underScores = []
-
-            var letters = chosenWord.split('');
-            console.log(letters);
+        var randNum = Math.floor(Math.random() * gotNames.length);
 
 
+        var wrongLetter = []
 
-            //Generate Underscores OR just list the number of letters
-            // document.getElementById("demo").onclick = function () { 
-            //     genUnderScore() };
+        var underScores = []
 
-            function genUnderScores() {
-                for (let i = 0; i < letters.length; i++) {
-                    underScores.push('_');
-                }
-                return underScores
+        var rightLetter = []
 
+
+        var gameOver = false
+
+
+        //Create Variables for lives,
+
+        var lives = 4
+
+        //Randomly generate a word from an array
+
+        var chosenWord = gotNames[randNum];
+        console.log(chosenWord)
+
+
+        // turns the chosen word into an array of strings
+        var letters = chosenWord.split('');
+        console.log(letters)
+
+
+        //Create underscores for the word that was randomly chosen
+        function genUnderScores() {
+            for (let i = 0; i < letters.length; i++) {
+                underScores.push('_');
             }
+            return underScores;
 
+        }
+
+        // //Start the Game
+        $('.row').on('click', (".start-btn"), function startGame() {
             genUnderScores()
+            $('#theWord').text(underScores);
+            $('#lives').text(lives);
+            console.log(underScores);
+        });
 
-            document.getElementById("rightGuess").innerHTML = underScores
-            document.getElementById("lives").innerHTML = lives
-            console.log(underScores)
 
-            document.onkeyup = function littlefinger(event) {
-                userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                if (userGuess == "a") {
-                    lives--;
-                    alert(lives)
-                }
+        document.onkeyup = function littlefinger(event) {
+            if (gameOver) { return; }
+            userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+            console.log(userGuess);
+            var replace = (chosenWord.indexOf(userGuess));
+            console.log(replace)
+            if (replace < 0) {
+                wrongLetter.push(userGuess);
+                console.log(wrongLetter)
+                $("#wrongGuess").text(wrongLetter);
+                lives--;
+                $('#lives').text(lives);
             }
+            if (replace >= 0){
+                underScores[replace] = userGuess;
+                $('#theWord').text(underScores)
+            }
+            if (lives==0){
+                alert('You are no true heir to the Iron Throne')
+                alert('Something terrible has happened to you in the worst imaginable way possible')
+            }
+            
+        }
 
 
 
-                // Creating an array out of the individual letters in the word
+        // document.onkeyup = function littlefinger(event) {
+        //     if (gameOver) { return; }
+        //     userGuess = String.fromCharCode(event).toLowerCase();
+        //     var replace = (chosenWord.indexOf(userGuess));
+        //     if (replace < 0) {
+        //         wrongGuess.push(userGuess);
+        //         document.getElementById("wrongGuess").innerHTML = wrongGuess;
+        //         lives--;
+        //         $("#lives").text(lives);
+        //     }
+
+        // };
+//Capture the users guess for letters
+
+//If the user guess is wrong, it removes from your lives and the letter is recorded
+
+//If the user guess is right it is written on the board
+
+//If the user runs out of lives, they lose the game
 
 
 
-                // turn individual word into an array containing each individual letter. Turn chosenword into an array
-
-                //chosenWord.length returns the number of characters in that string. var before .length is string
-
-                //Get user guess
-                //called littlefinger because you dont know if you can trust it
-                // document.onkeyup = function littlefinger(event) {
-                //     userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                //     var replace = (chosenWord.indexOf(userGuess));
-                //     var lives = 4
-                //     document.getElementById("lives").innerHTML = lives
-                //     console.log(replace);
-                //     if (replace < 0) {
-                //         wrongGuess.push(userGuess);
-                //         document.getElementById("wrongGuess").innerHTML = wrongGuess;
-                //         lives = lives - 1
-                //     }
-                //     for (var i = 0; i < letters.length; i++) {
-                //         if (replace >= 0) {
-                //             underScores[replace] = userGuess;
-                //             console.log(letters[replace]);
-                //             document.getElementById("rightGuess").innerHTML = underScores
-                //         }
-                //     }
-                //     if (lives < 1) {
-                //         alert("You Have Lost the Game of Thrones");
-                //     }
-                // }
-                // console.log(wrongGuess);
-                // document.getElementById("badguess").innerHTML = userGuess;
-
-
-
-            //Saving this code for later 
-
-                    // document.onkeyup = function littlefinger(event) {
-                    //     userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-                    //     wrongGuess.push(userGuess);
-                    //     console.log(userGuess);
-                    //     // console.log(wrongGuess);
-                    //     document.getElementById("badguess").innerHTML = userGuess;
-                    //     alert(chosenWord[0].indexOf(userGuess))
-                    // }
-
-
-                    // function splitString(stringToSplit, space) {
-                    //     var arrayOfStrings = stringToSplit.split(space);
-                    //     console.log('The original string is: ' + stringToSplit + '"');
-                    //     console.log('The separator is: ' + space + "'");
-                    //     splitString(chosenWord, space);
-                    //     cnosole.log(arrayOfStrings)
-                    // }
-
-
-
-                    //Check if user guess is right
-
-
-
-
-
-
-
-                    //if right, push to right array
-                    //If wrong push to wrong array
-
-                    // 
-                    // ;
-
-                    // var s;
-                    // var count = 0;
-
-
-                    // var answers = [];
-
-                    // function StartUp()
-                    // {
-                    //     for (var i = 0; i <gotnames.length; i++)
-                    //     {
-                    //         answers[i] = "_";
-                    //     }
-
-
-                    // s = answers.join(" ");
-                    // document.getElementById("underscore").innerHTML = s;
-                    // }
-
-                    // console.log(randword)
-
-        </script>
-
-
+    </script>
 
 </body>
 

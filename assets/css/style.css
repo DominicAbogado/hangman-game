@@ -1,27 +1,38 @@
 body {
-    background-color: darkgrey;
+    background-image: url("/assets/images/ironthrone.jpg");
+    font-family: 'Cinzel Decorative', cursive;
+    color: #444444;
 }
 
 #maintitle{
     border: solid 4px black;
     text-align: center;
     margin-bottom:20px;
+    background-color: lightgray
 
 }
 
 #gamespace{
-    border: solid 2px black;
+    border: solid 2px lightseagreen;
     text-align:center;
     height: 130px;
     margin-bottom:20px;
+    background-color: lightgray
 }
 #guesses{
-    border: solid 2px black;
+    border: solid 2px lightseagreen;
     text-align:center;
     height: 100px;
-    margin-bottom: 20px;
+    background-color: lightgray
 }
 underscore{
     font-size:30px;
     text-align:bottom;
+    background-color: lightgray
+}
+
+#theWord{
+    font-size: 30px;
+    letter-spacing: 3px;
+    background-color: lightgray
 }
